@@ -173,24 +173,20 @@ def genConst(M, constType, plotBits):
             plt.ylim(1.25*min(symbTx.real),1.25*max(symbTx.real));
             plt.vlines(0, 1.25*min(symbTx.real), 1.25*max(symbTx.real))
             plt.hlines(0, 1.25*min(symbTx.real), 1.25*max(symbTx.real))
-        
+
         if M>64:
             plt.plot(symbTx.real, symbTx.imag,'o', markersize=4);
         else:
             plt.plot(symbTx.real, symbTx.imag,'o', markersize=10);                
-      
-        plt.title('Constelação '+str(M)+'-'+constType.upper());
-        
-        if plotBits:
-            if M>=64:
-                fontSize = 6
-            else:
-                fontSize = 12
 
+        plt.title(f'Constelação {str(M)}-' + constType.upper());
+
+        if plotBits:
+            fontSize = 6 if M>=64 else 12
             for ind, symb in enumerate(constSymb):
                 bitMap[ind,:]
                 plt.annotate(str(bitMap[ind,:])[1:-1:2], xy = (symb.real-0.05, symb.imag+0.15), size=fontSize)
-        
+
     except:
         return    
     
