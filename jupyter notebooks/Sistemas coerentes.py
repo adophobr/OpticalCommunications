@@ -298,17 +298,15 @@ def hybrid_2x4_90(E1, E2):
     
     M = Matrix([[C_3dB, zeros(2)], 
                 [zeros(2), C_3dB]])
-    
+
     U = Matrix([[1, 0, 0, 0],
                 [0, 0, 1, 0],
                 [0, 1, 0, 0],
                 [0, 0, 0, j]])
-    
+
     Ei = Matrix([[E1],[0],[0],[E2]]) # vetor 4x1
-    
-    Eo = M*U*M*Ei 
-    
-    return Eo    
+
+    return M*U*M*Ei    
 
 # fotodetector balanceado
 def bpd(E1, E2, R=1):
@@ -406,19 +404,17 @@ def hybrid_2x4_90deg(E1, E2):
     :return: hybrid outputs
     '''
     assert E1.size == E2.size, 'E1 and E2 need to have the same size'
-    
+
     # optical hybrid transfer matrix    
     T = np.array([[ 1/2,  1j/2,  1j/2, -1/2],
                   [ 1j/2, -1/2,  1/2,  1j/2],
                   [ 1j/2,  1/2, -1j/2, -1/2],
                   [-1/2,  1j/2, -1/2,  1j/2]])
-    
+
     Ei = np.array([E1, np.zeros((E1.size,)), 
                    np.zeros((E1.size,)), E2])    
-    
-    Eo = T@Ei
-    
-    return Eo
+
+    return T@Ei
     
 def coherentReceiver(Es, Elo, Rd=1):
     '''
